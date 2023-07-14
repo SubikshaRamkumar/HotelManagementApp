@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --Primary :   #000055 ;
+    --Primary-light : #00003c72 ; 
+    --Secondary: #ADD8E6;
+    --Secondary-light: #add8e697;
+}
+::selection
+{
+    color: var(--Primary);
+    background-color: var(--Secondary-light);
+}
+.galContent
+{
+    margin-top: 20px;
+}
