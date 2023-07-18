@@ -171,7 +171,8 @@ const HandleSignup = async() => {
 return (
 
         <div style={{backgroundColor: '#00003c72', height: '790px' }}>
-            {error!==null ? <p>{error}</p>: <p></p>}
+            {/* {error!==null ? <p>{error}</p>: <p></p>} */}
+            {error && <p>{error}</p>}
             <Header type='noBack' home='nohome'/>
             <div className='img' style={{
                     minHeight: '70vh',
@@ -222,4 +223,3 @@ return (
 }
 
 export default Signup
-
