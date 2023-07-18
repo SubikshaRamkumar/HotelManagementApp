@@ -3,12 +3,13 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from './Components/HomePage';
 import Header from './Components/Header';
 import Content from './Components/Content';
-import Footer from './Components/Footer';
 import Signup from './Components/SignUp';
 import Login from './Components/Login';
 import Gallery from './Components/Gallery';
 import Reservation from './Components/Reservation';
 import Dining from './Components/Dining';
+import Contact from './Components/Contact';
+import Profile from './Components/Profile';
 
 
 function App() {
@@ -26,9 +27,12 @@ function App() {
         <Route path="/reserve" element={<Reservation/>}></Route>
         <Route path="/gallery" element={<Gallery/>}></Route>
         <Route path="/dining" element={<Dining/>}></Route>
+        <Route path="/contact" element={<Contact/>}></Route>
+        <Route path="/profile" element={<Profile/>}></Route>
       </Routes>
     </div>
   );
 }
 
 export default App;
+

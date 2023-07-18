@@ -1,5 +1,5 @@
 import React from 'react'
-import './Cssfiles/Footer.css'
+import './Cssfiles/Foot.css'
 
 import { BsFacebook } from "react-icons/bs";
 import { FaInstagramSquare } from "react-icons/fa";
@@ -7,8 +7,8 @@ import { AiFillTwitterCircle } from "react-icons/ai";
 import { BsYoutube } from "react-icons/bs";
 const Footer = () => {
   return (
-    <div className='whole' style={{display:'none'}}>
-    <div className='container'>
+    <div className='whole'>
+    <div className='con'>
       
       <div className="col">
         <div className="side" style={{marginLeft:'10px'}}>
@@ -16,7 +16,7 @@ const Footer = () => {
         <h1 className='hel'>Phone Support</h1>
         <h6 >24 HOURS A DAY</h6>
         </div>
-        <h1 className='last' style={{marginTop:'40px',marginLeft:'10px'}}>+ 01 234 567 890</h1>
+        <h1 className='last' style={{marginTop:'0px',marginLeft:'10px'}}>+ 01 234 567 890</h1>
       </div>
       <div className="col">
         <div className="side" style={{marginLeft:'10px'}}>
@@ -24,7 +24,7 @@ const Footer = () => {
         <h1 className='hel'>Follow US</h1>
         <h6 >SOCIAL MEDIA CHANNELS</h6>
         </div>
-        <div className="media last" style={{marginLeft:'115px'}}>
+        <div className="media last" style={{marginLeft:'110px',marginTop:'0px'}}>
         <BsFacebook/>   
         <FaInstagramSquare/>
         <AiFillTwitterCircle/>
@@ -39,16 +39,16 @@ const Footer = () => {
         <h1 className='hel'>Our NewsLetter</h1>
         <h6 >SIGN UP FOR SPECIAL OFFERS</h6>
         </div>
-        <h1 className='last' style={{marginTop:'40px',marginLeft:'20px'}}>+ 01 234 567 890</h1>
+        <h1 className='last' style={{marginTop:'0px',marginLeft:'20px'}}>+ 01 234 567 890</h1>
       </div>
       
     </div>
-    <div className='bottom' style={{listStyleType:'none'}}>
+    <div className='bottom' style={{listStyleType:'none',paddingTop:'120px',textAlign:'center',marginLeft:'450px'}}>
       <li>Privacy Policy</li>
       <li>Cookie Policy</li>
       <li>Credits</li>
     </div>
-      <div className='bottom_last'>Copyrights &copy; 2023 SCENIC SOLITUD RESORT - All Rights Reserved. - P.IVA 09472742954  </div>
+      <div className='bottom_last' style={{ }}>Copyrights &copy; 2023 SCENIC SOLITUD RESORT - All Rights Reserved. - P.IVA 09472742954  </div>
     </div>
   )
 }

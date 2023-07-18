@@ -1,24 +1,55 @@
-import React from 'react'
-import ImageAtTop from './ImageAtTop'
+import React, { useState } from 'react'
 import './Cssfiles/Reservation.css'
-import Details from './Details'
 import Header from './Header'
-import { red } from '@mui/material/colors'
+
 import TextField from '@mui/material/TextField';
-import { width } from '@mui/system'
+
+
 import MenuItem from '@mui/material/MenuItem';
 import Input from '@mui/base/Input';
 import { styled } from '@mui/system';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers-pro';
-import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+import axios from 'axios';
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+// import { LocalizationProvider } from '@mui/x-date-pickers-pro';
+// import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
+// import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import Button from 'react-bootstrap/Button';
+import Appfr from '../Appfr'
 const Reservation = () => {
 
+  const [fname,setFname]=useState("");
+  const [lname,setLname]=useState("");
+  const [email,setEmail]=useState("");
+  const [roomType,setRoomType]=useState("");
+  const [ng,setNg]=useState("");
+  const [ad,setAd]=useState("");
+  const [df,setDd]=useState("");
+  const [pickup,setPickup]=useState("");
+  const [splReq,setSplreq]=useState("");
+  const [rev,setRev]=useState("");
+
+  const handleSubmit = async(event) => {
+    const data = {
+      name : fname,
+      // lname : lname,
+      email: email,
+      roomType : roomType,
+      adate: ad,
+      ddate: df,
+      numofRoom: ng,
+    }
+    event.preventDefault();
+    try{
+      const response = await axios.post("http://127.0.0.1:2020/addCust", data);
+      console.log(response.data);
+    }
+    catch(error) {
+      console.log("error", error);
+    }
+  }
+  
   const CustomInput = React.forwardRef(function CustomInput(props, ref) {
     return (
       <Input
@@ -131,38 +162,48 @@ const Reservation = () => {
   });
   const types = [
     {
-      value: 'single',
-      label: 'Single',
+      value: 'Non AC Single',
+      label: 'Non AC Single',
     },
     {
-      value: 'EUR',
-      label: '€',
+      value: 'Non AC Double',
+      label: 'Non AC Double',
     },
     {
-      value: 'BTC',
-      label: '฿',
+      value: 'AC Double',
+      label: 'AC Double',
     },
     {
-      value: 'JPY',
-      label: '¥',
+      value: 'AC Single',
+      label: 'AC Single',
+    },
+    {
+      value: 'Penthouse',
+      label: 'Penthouse',
+    },
+    {
+      value: 'Family Room',
+      label: 'Family Room',
+    },
+    {
+      value: 'Suite room',
+      label: 'Suite room',
     },
   ];
   return (
+    <form onSubmit={e=>e.preventDefault()}>
     <div className='wholed'>
       <Header type='noBack' home='nohome' />
-
-      {/* <div className="firsthalf" style={{ maxHeight: '300px', minHeight: '300px'}}>
-        
-      </div> */}
       <div className="secondhalf" style={{color:'white'}}>
         <div className="head">
-          <h2>BOOKING</h2>
+          <div style={{fontSize:'30px'}}>BOOKING</div>
           <h4>Experience something new every moment</h4>
         </div>
         <div className="form">
           <div className="name">
             <label style={{ fontSize: '20px' }}>Name :</label>
             <TextField id="outlined-basic" label="FirstName" variant="outlined"
+            
               InputProps={{
                 style: {
                   color: 'white',
@@ -179,7 +220,8 @@ const Reservation = () => {
                   },
                 },
               }}
-
+value={fname}
+onChange={e=>setFname(e.target.value)}
             />
             <TextField id="outlined-basic" label="LastName" variant="outlined"
               InputProps={{
@@ -198,6 +240,8 @@ const Reservation = () => {
                   },
                 },
               }}
+              value={lname}
+onChange={e=>setLname(e.target.value)}
             />
           </div>
           <div className="email">
@@ -222,12 +266,14 @@ const Reservation = () => {
                     borderColor: 'white', // Set the outline color to "blue" or any other valid CSS color value
                   },
                 },
-              }} />
+              }} 
+              value={email} onChange={e=>setEmail(e.target.value)}/>
             {/* <TextField id="outlined-basic" label="LastName" variant="outlined" /> */}
           </div>
           <div className="room-type">
             <label style={{ fontSize: '20px' }}>Room Type</label>
             <TextField
+            value={roomType} onChange={e=>setRoomType(e.target.value)}
               id="outlined-select-currency"
               InputProps={{
                 style: {
@@ -260,7 +306,9 @@ const Reservation = () => {
           </div>
           <div className="guests">
             <label style={{ fontSize: '20px' }}>Number of guest :</label>
-            <TextField InputProps={{
+            <TextField 
+            value={ng} onChange={e=>setNg(e.target.value)}
+            InputProps={{
               style: {
                 color: 'white',
               },
@@ -276,16 +324,16 @@ const Reservation = () => {
                   },
                 },
               }} id="outlined-basic" label="Number of guest" type='number' variant="outlined" style={{ marginLeft: '100px' }} />
-            {/* <TextField id="outlined-basic" label="LastName" variant="outlined" /> */}
           </div>
-          <div className="date" style={{ marginLeft: '-80px' }}>
+          <div className="date" style={{ marginLeft: '-100px' }}>
             <label style={{ fontSize: '20px' }}>Arrival Date and Time :</label>
-            {/* <TextField id="outlined-basic" label="Number of guest" type='number' variant="outlined" style={{marginLeft:'100px'}}/> */}
-            {/* <TextField id="outlined-basic" label="LastName" variant="outlined" /> */}
-            <ThemeProvider theme={theme}>
+            <input type='date' style={{padding:'20px',marginLeft:'-90px',opacity:'0.5'}} value={ad} onChange={e=>setAd(e.target.value)}></input>
+            <input type='date' style={{padding:'20px',marginLeft:'-90px',opacity:'0.5'}} value={df} onChange={e=>setDd(e.target.value)}></input>
+            {/* <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterDayjs} >
               <DemoContainer components={['DateRangePicker']}>
                 <DateRangePicker localeText={{ start: 'Check-in', end: 'Check-out' }}
+               
                   InputProps={{
                     sx: {
                       color: 'white', // Change the text color of the input
@@ -305,11 +353,14 @@ const Reservation = () => {
                   }} />
               </DemoContainer>
             </LocalizationProvider>
-            </ThemeProvider>
+            </ThemeProvider> */}
+
           </div>
           <div className="pickup">
             <label style={{ fontSize: '20px' }}>Free Pickup :</label>
-            <TextField InputProps={{
+            <TextField 
+            value={pickup} onChange={e=>setPickup(e.target.value)}
+            InputProps={{
               style: {
                 color: 'white',
               },
@@ -328,21 +379,24 @@ const Reservation = () => {
             {/* <TextField id="outlined-basic" label="LastName" variant="outlined" /> */}
           </div>
           <div className="det">
-            <label style={{ fontSize: '20px' }}>Special Request :</label>
-            {/* <TextField id="outlined-basic" label="PickUp" variant="outlined" style={{marginRight:'440px'}} /> */}
-            {/* <TextField id="outlined-basic" label="LastName" variant="outlined" /> */}
-            <CustomInput style={{ marginRight: '344px' }} aria-label="Demo input" multiline placeholder="Type something…" />
+            <label style={{ fontSize: '20px' }}>Location :</label>
+            <CustomInput style={{ marginRight: '344px' ,opacity:'0.5'}} aria-label="Demo input" multiline placeholder="Type address..." />
           </div>
           <div>
-
-            <Button className="button" style={{ backgroundColor: '#ADD8E6',color:'blue', borderRadius: '50px', width: '150px', marginLeft: '900px', marginTop: '100px', marginBottom: '100px' }}>
-              Submit
+            {console.log(fname)}
+            <label style={{ fontSize: '20px' , marginTop:'40px' }}>Willing to provide us review of our website :</label>
+<Appfr/>
+            <Button onClick={handleSubmit} className="button" style={{ backgroundColor: '#ADD8E6',color:'blue', borderRadius: '50px', width: '150px', marginLeft: '900px', marginTop: '100px', marginBottom: '100px'}}> 
+            Submit
             </Button>
-          </div>
+            {console.log(df)}
+            
+           </div>
         </div>
       </div>
 
     </div>
+    </form>
   )
 }
 

@@ -16,16 +16,17 @@
     color: var(--Primary);
     background-color: var(--Secondary-light);
 }
-.head{
-    text-align: center;
-    padding-top: 40px;
-}
 .whole
 {
     padding: 100px;
     align-items: center;
     text-align: center;
 }
+.head{
+    text-align: center;
+    padding-top: 40px;
+}
+
 .fristhalf
 {
     background-color: ;
@@ -33,7 +34,7 @@
 }
 .secondhalf
 {
-background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url("https://i.pinimg.com/originals/c4/d3/ba/c4d3bad3d6a80ad1827bbd11bce0c11e.jpg");
+background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("https://i.pinimg.com/originals/c4/d3/ba/c4d3bad3d6a80ad1827bbd11bce0c11e.jpg");
 background-repeat: no-repeat;
 background-size: cover;
 

@@ -15,7 +15,7 @@ import { MdOutlineCallEnd } from "react-icons/md";
 import { TfiGallery } from "react-icons/tfi";
 import { IoIosCall } from "react-icons/io";
 import { Box, Paper } from '@mui/material';
-
+import Avatar from '@mui/material/Avatar';
 const Header = (props) => {
 
   const nav = useNavigate();
@@ -28,14 +28,20 @@ const Header = (props) => {
   const gotoSignup = () => {
     nav('/signup');
   }
-  const gotoGallery = () =>{
+  const gotoGallery = () => {
     nav('/gallery')
   }
-  const gotoReservation = () =>{
+  const gotoReservation = () => {
     nav('/reserve')
   }
-  const gotoDining = () =>{
+  const gotoDining = () => {
     nav('/dining')
+  }
+  const gotoContact = () => {
+    nav('/contact')
+  }
+  const gotoProfile = () => {
+    nav('/profile')
   }
 
   const [active, setActive] = useState('nav_list_items');
@@ -49,97 +55,109 @@ const Header = (props) => {
       ? setToggleIcon('nav__toggler toggle')
       : setToggleIcon('nav__toggler')
   }
-  
-const [bbb,setBbb] = useState('not_basic_show')
 
-const [aaa,setAaa] = useState('hide_dots');
-// const [bbb,setBbb] = useState('not_basic_hide')
+  const [bbb, setBbb] = useState('not_basic_show')
 
-// const [aaa,setAaa] = useState('show_dots hide_cross');
+  const [aaa, setAaa] = useState('hide_dots');
+  // const [bbb,setBbb] = useState('not_basic_hide')
 
-// const func=()=>{
-//   bbb==='not_basic_hide' ? setAaa('not_basic_show') : setAaa('not_basic_hide')
-  
-//   aaa==='show_dots hide_cross' ? setBbb('hide_dots show_cross') : setBbb('show_dots hide_cross')
+  // const [aaa,setAaa] = useState('show_dots hide_cross');
 
-// }
-const func=()=>{
-  bbb==='not_basic_show' ? setAaa('not_basic_show') : setAaa('not_basic_show')
-  
-  aaa==='hide_dots' ? setBbb('hide_dots') : setBbb('hide_dots')
+  // const func=()=>{
+  //   bbb==='not_basic_hide' ? setAaa('not_basic_show') : setAaa('not_basic_hide')
 
-}
+  //   aaa==='show_dots hide_cross' ? setBbb('hide_dots show_cross') : setBbb('show_dots hide_cross')
+
+  // }
+  const func = () => {
+    bbb === 'not_basic_show' ? setAaa('not_basic_show') : setAaa('not_basic_show')
+
+    aaa === 'hide_dots' ? setBbb('hide_dots') : setBbb('hide_dots')
+
+  }
+
+
+  const funx = (home) => {
+    if (home === 'home') {
+      return (
+        <div className="boxx" style={{ position: 'absolute', zIndex: '2' }}>
+          <div
+            className={props.home}
+            style={{
+              marginLeft: '250px',
+              marginTop: '200px',
+              position: 'relative',
+              zIndex: '1',
+            }}
+          >
+            <MdHotelClass
+              style={{
+                height: '400px',
+                width: '400px',
+                color: '#52c7ee',
+                opacity: '0.2',
+              }}
+            />
+          </div>
+          <div
+            className="contentt"
+            style={{ marginTop: '-250px', marginLeft: '450px', color: 'red', position: 'relative', zIndex: '1' }}
+          >
+            <p className="para">WELCOME TO</p>
+            <p className="para">SCENIC SOLITUDE RESORT</p>
+          </div>
+        </div>
+      );
+    }
+  };
+  // const funx = (home) => {
+  //   if (home === 'home') {
+  //     return (
+        
+  //     );
+  //   }
+  // };
 
   return (
     <header className={props.type}>
-      <div className='none'>
-    <div className="boxx" style={{position : 'absolute'}}>
-       if({props.home}==='home') ? 
-       {/* (<Box  sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        marginLeft:'300px',
-        marginTop:'300px',
-        '& > :not(style)': {
-          m: 1,
-          width: 600,
-          height: 300,
-        },
-      }}>
-        <Paper elevation={3} sx={{ backgroundColor: 'lightblue',borderRadius:'0 0 100px 0' }} >
-          <div>Subi</div>
-          </Paper>
-
-       </Box>) */}
-       (
-        <div className="logoo" style={{marginLeft:'70px',
-        marginTop:'300px'}}>
-          <MdHotelClass style={{ height: '400px', width: '400px' ,color:'#52c7ee',opacity:'0.2'}} />
+ <div className="none">
+        <div className="boxx" style={{ position: 'relative', zIndex: '1' }}>
+          {funx(props.home)}
         </div>
-        <div className="contentt" style={{marginTop:'-500px',marginLeft:'550px',color:'red'}}>
-          <p>Want to explore things in </p>
-        </div>
-       )
-    </div>
-
       </div>
-      {/* {console.log(props.type)} */}
+      
       <div className="header-main">
         <div className="brand">
           {/* <span className="small-logo">
             <MdHotelClass style={{marginRight:'100px',height:'70px',width:'70px',opacity:'0.5'}}/>
           </span> */}
           Scenic Solitude Resort
-          
+
         </div>
 
         <ul className={active}>
           <li className='nav_item' onClick={gotoHome}>HOME</li>
-          
+
           <li className='nav_item' onClick={gotoLogin}>LOGIN</li>
           <li className='nav_item' onClick={gotoSignup}>SIGN UP</li>
-          <div className={bbb}  style={{backgroundColor :'#000055',marginTop:'115px'}}>
+          <div onClick={gotoProfile}>
+            <Avatar style={{backgroundColor: 'blue', }}><p style={{justifyContent: 'center', marginTop: "15px"}}>A</p></Avatar>
+          <li className='nav_item' >PROFILE</li>
+          </div>
+          <div className={bbb} style={{ backgroundColor: '#000055', marginTop: '115px' }}>
             <div className={props.home}>
-      {console.log(props.home)}
-              
-<div className='inside' style={{backgroundColor:'#00003c72',paddingLeft:'30px',minHeight:'690px',marginBottom:'10px',width:'300px',right:'0'}}>
-          <li className='nav_item_inside'  style={{marginTop:'20px'}}onClick={gotoGallery}><TfiGallery/> GALLERY</li>
-          <li className='nav_item_inside' onClick={gotoReservation}><BiConversation/> RESERVATION</li>
-          <li className='nav_item_inside' onClick={gotoDining}><PiCallBellThin/> DINING</li>
-          <li className='nav_item_inside' onClick={gotoReservation}><RiBox2Fill/>  OFFERS AND PACKAGES</li>
-          <li className='nav_item_inside' onClick={gotoReservation}><IoIosCall/> CONTACT</li>
-          {/* <li className='nav_item_inside' onClick={gotoReservation}>CONTACT</li>
-          <li className='nav_item_inside' onClick={gotoReservation}>CONTACT</li>
-          <li className='nav_item_inside' onClick={gotoReservation}>CONTACT</li>
-          <li className='nav_item_inside' onClick={gotoReservation}>CONTACT</li>
-          <li className='nav_item_inside' onClick={gotoReservation}>CONTACT</li>
-          <li className='nav_item_inside' onClick={gotoReservation}>CONTACT</li>
-          <li className='nav_item_inside' onClick={gotoReservation}>CONTACT</li>
-          <li className='nav_item_inside' onClick={gotoReservation}>CONTACT</li> */}
+              {/* {console.log(props.home)} */}
+
+              <div className='inside' style={{ backgroundColor: '#00003c72', paddingLeft: '30px', minHeight: '690px', marginBottom: '10px', width: '300px', right: '0' }}>
+                <li className='nav_item_inside' style={{ marginTop: '20px' }} onClick={gotoGallery}><TfiGallery /> GALLERY</li>
+                <li className='nav_item_inside' onClick={gotoReservation}><BiConversation /> RESERVATION</li>
+                <li className='nav_item_inside' onClick={gotoDining}><PiCallBellThin /> DINING</li>
+                <li className='nav_item_inside' onClick={gotoContact}><IoIosCall /> CONTACT</li>
+
+              </div>
+            </div>
           </div>
-          </div>
-          </div>
-          {/* <li className='nav_item'> <div className={toggleIcon } onClick={navToggle} style={{display:'block'}}><FiMoreHorizontal/></div></li> */}
+
         </ul>
 
         <div onClick={navToggle} className={toggleIcon}>

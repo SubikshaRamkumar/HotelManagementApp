@@ -6,7 +6,7 @@ import Footer from './Footer'
 
 const Gallery = () => {
   return (
-    <div>
+    <div style={{background: 'linear-gradient(to bottom,black, #666257,black )' , height:'100vh'}}>
       <Header type='noBack' home='nohome'/>
       <GalContents/>
       {/* <Footer/> */}

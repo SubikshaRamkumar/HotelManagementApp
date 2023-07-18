@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from './Footer'
+import Foot from './Foot'
 import Content from './Content'
 import Header from './Header'
 
@@ -8,7 +8,7 @@ const HomePage = () => {
     <div>
       <Header type='Back' home='home'/>
       {/* <Content/> */}
-      <Footer/>
+      <Foot/>
     </div>
   )
 }
