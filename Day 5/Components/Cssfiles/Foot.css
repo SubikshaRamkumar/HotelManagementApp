@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --Primary :   #000055 ;
+    --Primary-light : #00003c72 ; 
+    --Secondary: #ADD8E6;
+    --Secondary-light: #add8e697;
+}
+::selection
+{
+    color: var(--Primary);
+    background-color: var(--Secondary-light);
+}
+.con
+{
+    margin-top: -200px;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    /* margin-left: 80px; */
+    /* padding-top: 20px; */
+}
+.whole
+{
+    padding: 0px;
+    background-color: var(--Primary);
+    width: 100%;
+    max-height: 320px;
+}
+.col
+{
+    text-align: center;
+    /* border: 2px solid var(--Secondary); */
+    color: var(--Secondary);
+    justify-content: space-between;
+
+    margin-left: 20px;
+    height: 200px;
+    
+}
+.media
+{
+
+    display: flex;
+    justify-content: space-around;
+    max-width: 200px;
+    /* margin-top: 0px; */
+    /* padding-top: 10px; */
+    margin-left: 10px;
+    font-size: 30px;
+}
+.bottom
+{
+    color: var(--Secondary);
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+    margin-left: 550px;
+    margin-top: 30px;
+    padding-top: 180px;
+}
+.bottom_last
+{
+    text-align: center;
+    color: var(--Secondary);
+    /* margin-top: 200px; */
+    padding-bottom: -20px;
+}
+.last{
+padding-top: 40px ;
+}
