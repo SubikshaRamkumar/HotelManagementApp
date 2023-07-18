@@ -1,0 +1,111 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --Primary :   #000055 ;
+    --Primary-light : #00003c72 ; 
+    --Secondary: #ADD8E6;
+    --Secondary-light: #add8e697;
+}
+::selection
+{
+    color: var(--Primary);
+    background-color: var(--Secondary-light);
+}
+.whole
+{
+    padding: 100px;
+    align-items: center;
+    text-align: center;
+}
+.head{
+    text-align: center;
+    padding-top: 40px;
+}
+
+.fristhalf
+{
+    background-color: ;
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url("https://i.pinimg.com/originals/c4/d3/ba/c4d3bad3d6a80ad1827bbd11bce0c11e.jpg"); */
+}
+.secondhalf
+{
+background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("https://i.pinimg.com/originals/c4/d3/ba/c4d3bad3d6a80ad1827bbd11bce0c11e.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+
+}
+.form
+{
+    color: white;
+    margin-top: 100px ;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+.name
+{
+    /* border: 1px solid rebeccapurple; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.email
+{
+    margin-top: 30px;
+    /* border: 1px solid rebeccapurple; */
+    /* display: flex; */
+    /* justify-content: space-between; */
+    align-items: center;
+}
+.room-type
+{
+    margin-top: 30px;
+    /* border: 1px solid rebeccapurple; */
+    /* display: flex; */
+    /* justify-content: space-between; */
+    align-items: center;
+}
+.guests
+{
+    margin-top: 30px;
+    /* border: 1px solid rebeccapurple; */
+    /* display: flex; */
+    /* justify-content: space-between; */
+    align-items: center;
+}
+.date
+{
+    margin-top: 30px;
+    /* border: 1px solid rebeccapurple; */
+    /* display: flex; */
+    /* justify-content: space-between; */
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.pickup
+{
+    /* border: 1px solid rebeccapurple; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+.det
+{
+    margin-top: 30px;
+    /* border: 1px solid rebeccapurple; */
+    /* display: flex; */
+    /* justify-content: space-between; */
+    align-items: center;
+    /* border: 1px solid rebeccapurple; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
