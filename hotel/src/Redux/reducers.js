@@ -1,4 +1,4 @@
-// reducers.js
+// reducers.js  ..creating actionsh fere 
 const initialState = {
     counter: 0
   };

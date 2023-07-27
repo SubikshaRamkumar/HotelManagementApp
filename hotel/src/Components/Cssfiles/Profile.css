@@ -66,9 +66,13 @@ h4{
     max-height: 100px;
     margin-bottom: 30px;
 }
+.u_name
+{
+    margin-bottom: 10px;
+}
 .cont 
 {
-    margin-left: 20px;
+    margin-left: 150px;
     color: #ADD8E6;
     flex-direction: column;
     display: flex;
@@ -115,4 +119,8 @@ h4{
 .buttonpro
 {
     /* background-color: var(--Secondary-light); */
+}
+.box2
+{
+    margin-top: 200px;
 }

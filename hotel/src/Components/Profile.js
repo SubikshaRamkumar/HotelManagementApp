@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import "./Cssfiles/Profile.css";
 import { Paper, Box, Avatar, Button } from "@mui/material";
@@ -6,301 +6,144 @@ import { BsFillPersonFill, BsClockHistory } from "react-icons/bs";
 import { FaAmazonPay } from "react-icons/fa";
 import { TbJewishStarFilled } from "react-icons/tb";
 import TextField from "@mui/material/TextField";
-const Profile = () => {
+import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Cookies from "js-cookie";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import { Navigate, useNavigate } from "react-router-dom";
+
+import { connect } from "react-redux";
+import { caseSuccess, caseFailure } from "./Reduxx/userSlice";
+
+
+const Profile = (props) => {
+  // const handleCaseSuccess = () => {
+  //   // Dispatch 'caseSuccess' action with a payload
+  //   props.dispatch(caseSuccess(props.email));
+  // };
+  // const handleCaseFailure = () => {
+  //   // Dispatch 'caseFailure' action
+  //   props.dispatch(caseFailure());
+  // };
+
+  const [data, setData] = useState([]);
+  const nav = useNavigate();
+  const handleShowProfile = () => {
+    nav("/proside");
+  };
+  const handleShowHistory = () => {
+    nav("/history");
+  };
+  useEffect(() => {
+    
+      
+      axios
+        .get(`http://127.0.0.1:2020/api/v1/auth/profile1/get/${Cookies.get("email")}`)
+        .then((response) => {
+          setData(response.data);
+          // console.log(response.data[0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+   
+  }, []);
+  
   return (
+    
     <div
       style={{
         backgroundImage:
           'url("https://t4.ftcdn.net/jpg/02/94/66/11/240_F_294661109_lmICWxfTmzfQdLZjEmXpGNRzR5BV4k2g.jpg")',
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
+        height: "100vh",
       }}
     >
-      <Header type="noBack" home="nohome" />
+      <Header type="noBack" home="nohome" about='false'  />
+
       <div className="profilecontent">
         <div className="listt">
           <Box
             className="box1"
             sx={{
               "& > :not(style)": {
-                width: 300,
+                width: 500,
                 height: 450,
                 backgroundColor: "#00003cba",
               },
             }}
           >
-            <Paper elevation={3} className="paperpp">
+            <Paper elevation={10} className="paperpp">
               <div className="ava">
                 <Avatar
-                  alt="Remy Sharp"
+                  // alt={Cookies.get('name').charAt(0).toUpperCase()}
                   src="/static/images/avatar/1.jpg"
-                  sx={{ width: 100, height: 100, marginTop: "40px",backgroundColor:'#ADD8E6',color: '#000055'}}
+                  sx={{
+                    width: 100,
+                    height: 100,
+                    marginTop: "40px",
+                    backgroundColor: "#ADD8E6",
+                    color: "#000055",
+                  }}
                 />
               </div>
               <div className="small_det">
-                <h4 className="u_name">Username</h4>
-                <div>Description about u in one line</div>
+              {/* <p>Case: {props.email}</p>
+              <button onClick={handleCaseSuccess}>Set Case Success</button> */}
+
+                {/* <div>{data.name}</div> */}
+                {/* <h4 className="u_name">{data.name.toUpperCase()}</h4>  
+                The error message "Cannot read properties of undefined (reading 'toUpperCase')" typically occurs when you try to access the method or property of a variable that is undefined. In this case, it seems to be happening inside the Profile component while trying to use the toUpperCase() method on a variable. To resolve the issue, you need to check where you are trying to use toUpperCase() and make sure that the variable you are calling it on is not undefined */}
+                <h4 className="u_name">{data.name && <p>{data.name.toUpperCase()}</p>}</h4>
+                {/* <div>Description about u in one line</div> */}
               </div>
               <div className="cont">
                 <div className="i">
                   <BsFillPersonFill />
-                  <div style={{ marginLeft: "30px" }}>Personal Information</div>
+                  <div
+                    style={{ marginLeft: "30px" }}
+                    onClick={handleShowProfile}
+                  >
+                    Personal Information
+                  </div>
                 </div>
-                <div className="i">
+                <div
+                  className="i"
+                  //  onClick={handleview}
+                >
                   <BsClockHistory />
-                  <div style={{ marginLeft: "30px" }}>Booking History</div>
+                  <div
+                    style={{ marginLeft: "30px" }}
+                    onClick={handleShowHistory}
+                  >
+                    Booking History
+                  </div>
                 </div>
-                <div className="i">
+                {/* <div className="i">
                   <FaAmazonPay />
                   <div style={{ marginLeft: "30px" }}>Payment</div>
                 </div>
                 <div className="i">
                   <TbJewishStarFilled />
                   <div style={{ marginLeft: "30px" }}>Preferences</div>
-                </div>
+                </div> */}
               </div>
             </Paper>
           </Box>
         </div>
-        <div className="dett">
-          <Box
-            className="box2"
-            sx={{
-              "& > :not(style)": {
-                width: 800,
-                height: 525,
-                backgroundColor: "#00003cba",
-              },
-            }}
-          >
-            <Paper elevation={3} className="paperpp2">
-              <div className="wholeright">
-                <div className="headprofile">Personal Information</div>
-                <div className="contentpro">
-                  <div className="stcol">
-                    <TextField
-                      id="outlined-basic"
-                      label="Name"
-                      variant="outlined"
-                      InputProps={{
-                        style: {
-                          width: "300px",
-                          marginLeft: "60px",
-                          color: "#ADD8E6",
-                          marginBottom: "20px",
-                        },
-                      }}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          marginLeft: "60px", // Adjust the marginLeft value for the label
-                        },
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#00003c72", // Set the outline color to "blue" or any other valid CSS color value
-                          },
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: "#6f7475d5" },
-                      }}
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="Phone Number"
-                      variant="outlined"
-                      InputProps={{
-                        style: {
-                          width: "300px",
-                          marginLeft: "60px",
-                          color: "#ADD8E6",
-                          marginBottom: "20px",
-                        },
-                      }}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          marginLeft: "60px", // Adjust the marginLeft value for the label
-                        },
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#00003c72", // Set the outline color to "blue" or any other valid CSS color value
-                          },
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: "#6f7475d5" },
-                      }}
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="Street Address"
-                      variant="outlined"
-                      InputProps={{
-                        style: {
-                          width: "300px",
-                          marginLeft: "60px",
-                          color: "#ADD8E6",
-                          marginBottom: "20px",
-                        },
-                      }}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          marginLeft: "60px", // Adjust the marginLeft value for the label
-                        },
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#00003c72", // Set the outline color to "blue" or any other valid CSS color value
-                          },
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: "#6f7475d5" },
-                      }}
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="State/Province/Region"
-                      variant="outlined"
-                      InputProps={{
-                        style: {
-                          width: "300px",
-                          marginLeft: "60px",
-                          color: "#ADD8E6",
-                          marginBottom: "20px",
-                        },
-                      }}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          marginLeft: "60px", // Adjust the marginLeft value for the label
-                        },
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#00003c72", // Set the outline color to "blue" or any other valid CSS color value
-                          },
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: "#6f7475d5" },
-                      }}
-                    />
-                  </div>
-                  <div className="ndcol">
-                    <TextField
-                      id="outlined-basic"
-                      label="Email"
-                      variant="outlined"
-                      InputProps={{
-                        style: {
-                          width: "300px",
-                          marginLeft: "20px",
-                          color: "#ADD8E6",
-                          marginBottom: "20px",
-                        },
-                      }}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          marginLeft: "20px", // Adjust the marginLeft value for the label
-                        },
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#00003c72", // Set the outline color to "blue" or any other valid CSS color value
-                          },
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: "#6f7475d5" },
-                      }}
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="city"
-                      variant="outlined"
-                      InputProps={{
-                        style: {
-                          width: "300px",
-                          marginLeft: "20px",
-                          color: "#ADD8E6",
-                          marginBottom: "20px",
-                        },
-                      }}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          marginLeft: "20px", // Adjust the marginLeft value for the label
-                        },
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#00003c72", // Set the outline color to "blue" or any other valid CSS color value
-                          },
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: "#6f7475d5" },
-                      }}
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="PostalCode"
-                      variant="outlined"
-                      InputProps={{
-                        style: {
-                          width: "300px",
-                          marginLeft: "20px",
-                          color: "#ADD8E6",
-                          marginBottom: "20px",
-                        },
-                      }}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          marginLeft: "20px", // Adjust the marginLeft value for the label
-                        },
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#00003c72", // Set the outline color to "blue" or any other valid CSS color value
-                          },
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: "#6f7475d5" },
-                      }}
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      label="Country"
-                      variant="outlined"
-                      InputProps={{
-                        style: {
-                          width: "300px",
-                          marginLeft: "20px",
-                          color: "#ADD8E6",
-                          marginBottom: "20px",
-                        }, //for the box
-                      }}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          marginLeft: "20px", // Adjust the marginLeft value for the label
-                        },
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#00003c72", // Set the outline color to "blue" or any other valid CSS color value
-                          },
-                        },
-                      }}
-                      InputLabelProps={{
-                        style: { color: "#6f7475d5" },
-                      }}
-                    />
-                  </div>
-                </div>
 
-                <div className="buttonpro1" style={{justifyContent:'center',display:'flex',marginTop:'30px'}}>
-                <Button className="buttonpro"variant="outlined" style={{backgroundColor:"#ADD8E6",color:'#000055',borderRadius:'10px',fontSize:'medium'}}>Save Changes</Button>
-                </div>
-              </div>
-            </Paper>
-          </Box>
-        </div>
+        <div></div>
       </div>
     </div>
   );
 };
 
 export default Profile;
+// const mapStateToProps = (state) => ({
+//   email: state.case.case, // Access the 'case' data from the 'case' slice in the Redux store
+// });
+
+// export default connect(mapStateToProps)(Profile);

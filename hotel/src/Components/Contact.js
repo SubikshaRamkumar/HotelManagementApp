@@ -3,11 +3,13 @@ import './Cssfiles/Contact.css'
 // import { Link } from 'react-router-dom';
 // import Navbar from '../navbar/Navbar'
 import Header from './Header'
+// import { useSelector } from 'react-redux/es/hooks/useSelector'
 function Contact() {
+  // const valueFromRedux = useSelector(state => state.email);
   return (
-    <div><Header type='noBack' home='nohome' />
+    <div><Header type='noBack' home='nohome' about='false' />
       <div className='contact-us'>
-
+{/* {console.log({valueFromRedux})} */}
         <body className='conbody'>
           <section>
 
@@ -65,7 +67,7 @@ function Contact() {
                     </div>
 
                     <div class="input-box">
-                      <input type="email" required="true" name=""></input>
+                      <input type="email" required="true" name="" ></input>
                       <p>Email</p>
                     </div>
 

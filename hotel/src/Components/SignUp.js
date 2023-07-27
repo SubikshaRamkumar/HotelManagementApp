@@ -131,15 +131,17 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Sign_img from './Sign_img';
 import {NavLink, useNavigate} from 'react-router-dom';
 import Header from './Header';
 import { createUserWithEmailAndPassword,getAuth } from 'firebase/auth';
-import { Navigate } from 'react-router-dom';
+import axios from 'axios';
+import Profile from './Profile';
+import Cookies from 'js-cookie';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setpassword] = useState('');
+    const [cpassword, setcpassword] = useState('');
     const [error, setError] = useState('');
     const [uname, setUname] = useState('');
     const navigate = useNavigate();
@@ -148,46 +150,72 @@ const Signup = () => {
 
 const HandleSignup = async() => {
     try{
-        // if(password!==confirmPassword){
-        //     setError('Password and Confirm password do not match');
-        //     return;
-        // }
+        if(!email || ! password || !cpassword ||!uname)
+        {
+            setError('Fill all details');
+            return;
+
+        }
+        if(password!==cpassword){
+            setError('Password and Confirm password do not match');
+            return;
+        }
+        const data = {
+            email : email,
+            name : uname,
+            password : password,
+            phoneNumber : '',
+            location : '',
+            city: '',
+            state: '',
+            postalCode :'',
+            country : '',
+    
+        }
+        
         await createUserWithEmailAndPassword(getAuth(), email, password);
-        // const data = {
-        //     email : email,
-        //     userName : username,
-        //     bio : '',
-        //     city : '',
-        //     relation : '',
-        // }
-        // const response = await axios.post("http://127.0.0.1:8080/Profile/add", data);
-        // console.log(response.data); 
+        Cookies.set('email', email,{ expires: 1 });
+        const response1 = await axios.post("http://127.0.0.1:2020/api/v1/auth/register", data);
+        // const response = await axios.post("http://127.0.0.1:2020/addGuest", data);
+        
+        console.log(response1.data); 
+        sessionStorage.setItem('isLoggedIn', true);
+        // console.log(response1); 
         navigate('/');
+        // <Profile emaill={email} uuname={uname} />
     }
     catch(e){
-        setError(e.message);
+        // setError(e.message);
+        if(e.message==="Firebase: Error (auth/email-already-in-use)."){
+            setError("Email already in use. Please Try again");
+            
+          }
+        
     }
 }
 return (
 
-        <div style={{backgroundColor: '#00003c72', height: '790px' }}>
-            {/* {error!==null ? <p>{error}</p>: <p></p>} */}
-            {error && <p>{error}</p>}
-            <Header type='noBack' home='nohome'/>
+        <div style={{backgroundColor: '#7795AA', height: '1000px' }}>
+            {/* {error  && alert(error) && setError("")} */}
+            {/* {error && <p>{error}</p>} */}
+            <Header type='noBack' home='nohome' about='false' />
             <div className='img' style={{
                     minHeight: '70vh',
             
-                    background: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-vKb2w5HlMTcx0HoOnTw2TORZeNheyWHGrBeFKTpDlw&s")',
-                    borderRadius: '0 200px 0 200px', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', marginLeft: '50px', marginRight: '50px'
+                    background: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://t4.ftcdn.net/jpg/02/94/66/11/240_F_294661109_lmICWxfTmzfQdLZjEmXpGNRzR5BV4k2g.jpg")',
+                    borderRadius: '0 200px 0 200px', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', marginLeft: '50px', marginRight: '50px',boxShadow:'40px 40px 200px #00003c72 '
                 }}>
             <div className="container mt-3">
                 <section className='d-flex justify-content-between'>
                     <div className="left_data mt-3 p-3" style={{ width: "100%", marginLeft: '450px' }}>
-                        <h3 className="text-center"style={{ color: '#000055', fontSize: 'xxx-large' }}>Sign Up</h3>
+                        <h3 className="text-center"style={{ color: 'lightblue', fontSize: 'xxx-large' }}>Sign Up</h3>
+                        {error && 
+      <p style={{color:'red',textAlign:'center'}}>{error}</p>       
+        }
                         <Form>
-                            <Form.Group className="mb-5" controlId="formBasicEmail" style={{ width: '430px' }}>
+                            <Form.Group className="mb-5" controlId="formBasicName" style={{ width: '430px' }}>
 
-                                <Form.Control type="text" name='name' placeholder="Enter your name" />
+                                <Form.Control type="text" name='name'value={uname} onChange={e => setUname(e.target.value)} placeholder="Enter your name" />
 
                             </Form.Group>
 
@@ -197,22 +225,26 @@ return (
 
                             </Form.Group>
 
-                            <Form.Group className="mb-5" controlId="formBasicEmail">
+                            {/* <Form.Group className="mb-5" controlId="formBasicEmail">
 
                                 <Form.Control type="date" name='date'  />
 
-                            </Form.Group>
+                            </Form.Group> */}
 
                             <Form.Group className="mb-5" controlId="formBasicPassword">
 
                                 <Form.Control type="password" name='password' value={password} onChange={e => setpassword(e.target.value)} placeholder="Password" />
+                            </Form.Group>
+                            <Form.Group className="mb-5" controlId="formBasicConfirmPassword">
+
+                                <Form.Control type="password" name='confirm password' value={cpassword} onChange={e => setcpassword(e.target.value)} placeholder="Confirm Password" />
                             </Form.Group>
 
                             <Button variant="primary" className="col-lg-6" style={{ backgroundColor: '#000055', borderRadius: '50px', width: '150px', marginLeft: '130px' }} onClick={HandleSignup}>
                                         Submit
                                     </Button>
                         </Form>
-                        <p className="mt-3" style={{color:"#000055",marginLeft:'70px'}}>Already have an account <span ><NavLink to="/login" style={{color:'#000055'}}>Sign in</NavLink></span></p>
+                        <p className="mt-3" style={{color:"darkblue",marginLeft:'70px',fontWeight:'bolder'}}>Already have an account  -<span ><NavLink to="/login" style={{color:'darkblue',marginLeft:'7px'}}>Login</NavLink></span></p>
                     </div>
                     
                 </section>

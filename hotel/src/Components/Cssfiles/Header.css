@@ -7,7 +7,7 @@
 :root{
     --Primary :   #000055 ;
     --Primary-light : #00003c72 ; 
-    --Secondary: #ADD8E6;
+    --Secondary: rgb(173, 216, 230);
     --Secondary-light: #add8e697;
 }
 ::selection
@@ -17,14 +17,15 @@
 }
 .Back
 {
-    min-height: 100vh;
+    min-height: 130vh;
     /* min-width: 100vw; */
 
-    background: linear-gradient(to bottom,rgb(0, 0, 0,0.262),rgba(0, 0, 0,0.7)), url("D:\New folder\Images\copyhome.jpg");
+    /* background: linear-gradient(to bottom,rgb(0, 0, 0,0.262),rgba(0, 0, 0,0.7)), url("D:\New folder\Images\copyhome.jpg"); */
+    background: url("D:\New folder\Images\copyhome.jpg");
     background-size: cover;
     /* background-position: top; */
     background-repeat: no-repeat;
-    background-color:#000055;
+    background-color:rgb(0, 0, 85);
     /* position: relative; */
     /* object-fit: cover; */
        /* background: linear-gradient(to bottom,rgb(0, 0, 0,0.262),rgba(0, 0, 0,0.7)), url("D:\New folder\Images\side phase of hotel.png");
@@ -57,7 +58,7 @@ li{
     height: 100px;
     background: var(--Primary);
     color: var(--Secondary);
-    box-shadow: 2px 2px 30px var(--Secondary-light);
+    box-shadow: 2px 2px 10px var(--Primary);
 
 }
 .brand
